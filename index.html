@@ -1,722 +1,409 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Network - Protect Earth</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        :root {
-            --primary: #2e7d32;
-            --secondary: #4caf50;
-            --accent: #8bc34a;
-            --light: #e8f5e9;
-            --dark: #1b5e20;
-            --text: #333333;
-            --white: #ffffff;
-        }
-
-        body {
-            background-color: var(--light);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .logo i {
-            font-size: 2rem;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 2rem;
-        }
-
-        nav ul li a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
-            position: relative;
-        }
-
-        nav ul li a:hover {
-            color: var(--accent);
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: var(--white);
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        section {
-            padding: 5rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent);
-            border-radius: 2px;
-        }
-
-        .section-title p {
-            color: var(--text);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-img {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-img img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .about-img:hover img {
-            transform: scale(1.05);
-        }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 2rem 1rem;
-            background-color: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-10px);
-        }
-
-        .stat-item i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .stat-item h3 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-item p {
-            color: var(--text);
-        }
-
-        .initiatives {
-            background-color: var(--white);
-        }
-
-        .initiatives-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .initiative-card {
-            background-color: var(--light);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .initiative-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .initiative-img {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .initiative-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .initiative-card:hover .initiative-img img {
-            transform: scale(1.1);
-        }
-
-        .initiative-content {
-            padding: 1.5rem;
-        }
-
-        .initiative-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .initiative-content p {
-            margin-bottom: 1.5rem;
-        }
-
-        .cta {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            text-align: center;
-            padding: 5rem 0;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta .btn {
-            background-color: var(--white);
-            color: var(--primary);
-        }
-
-        .cta .btn:hover {
-            background-color: var(--accent);
-            color: var(--white);
-        }
-
-        footer {
-            background-color: var(--dark);
-            color: var(--white);
-            padding: 3rem 0 1rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--accent);
-        }
-
-        .footer-column p {
-            margin-bottom: 1rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links li a {
-            color: var(--light);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links li a:hover {
-            color: var(--accent);
-            padding-left: 5px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--white);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background-color: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        @media (max-width: 992px) {
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--primary);
-                flex-direction: column;
-                padding: 1rem 0;
-                text-align: center;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            }
-            
-            nav ul.active {
-                display: flex;
-            }
-            
-            nav ul li {
-                margin: 0;
-                padding: 0.8rem 0;
-            }
-            
-            .mobile-menu {
-                display: block;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animation for stats counter */
-        .counter {
-            transition: all 0.5s ease;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>人工智能全景介绍 | 现代科技AI分类指南</title>
+  <!-- 引入Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- 引入Font Awesome图标 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- 引入动画库 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <!-- 自定义Tailwind配置 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            tech: {
+              primary: '#165DFF', // 科技主蓝
+              secondary: '#7B61FF', // 科技紫
+              dark: '#0F172A', // 科技深灰
+              light: '#E0E7FF', // 科技浅蓝
+              glow: '#06B6D4' // 科技荧光蓝
+            },
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          backgroundImage: {
+            'tech-gradient': 'linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #334155 100%)',
+            'glow-gradient': 'linear-gradient(90deg, #165DFF, #7B61FF, #06B6D4)',
+          }
+        },
+      }
+    }
+  </script>
+  <style type="text/tailwindcss">
+    @layer utilities {
+      /* 自定义工具类：科技感阴影 */
+      .tech-shadow {
+        box-shadow: 0 0 15px rgba(22, 93, 255, 0.3), 0 0 30px rgba(123, 97, 255, 0.2);
+      }
+      .tech-shadow-hover {
+        box-shadow: 0 0 20px rgba(22, 93, 255, 0.4), 0 0 40px rgba(123, 97, 255, 0.3);
+      }
+      /* 文字渐变 */
+      .text-gradient {
+        background-clip: text;
+        -webkit-background-clip: text;
+        color: transparent;
+        background-image: linear-gradient(90deg, #165DFF, #7B61FF, #06B6D4);
+      }
+      /* 滚动条美化 */
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 8px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: #1E293B;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background: #165DFF;
+        border-radius: 4px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background: #06B6D4;
+      }
+    }
+    /* 全局样式 */
+    body {
+      scroll-behavior: smooth;
+    }
+    /* 渐变背景动画 */
+    .gradient-animate {
+      background-size: 200% 200%;
+      animation: gradientMove 8s ease infinite;
+    }
+    @keyframes gradientMove {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    /* 卡片悬浮上浮动画 */
+    .card-hover {
+      transition: all 0.3s ease;
+    }
+    .card-hover:hover {
+      transform: translateY(-8px);
+    }
+  </style>
 </head>
-<body>
-    <!-- Header -->
-    <header>
-        <div class="container nav-container">
-            <div class="logo">
-                <i class="fas fa-seedling"></i>
-                <span>Green Network</span>
-            </div>
-            <nav>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#initiatives">Initiatives</a></li>
-                    <li><a href="#get-involved">Get Involved</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
+<!-- 全局背景+自定义滚动条 -->
+<body class="bg-tech-dark text-white custom-scrollbar min-h-screen">
+  <!-- 导航栏：固定顶部+透明渐变+响应式 -->
+  <nav class="fixed top-0 left-0 w-full z-50 bg-tech-dark/80 backdrop-blur-md border-b border-tech-primary/20">
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+      <a href="#home" class="flex items-center gap-2">
+        <i class="fa-solid fa-robot text-tech-glow text-2xl"></i>
+        <h1 class="text-xl md:text-2xl font-bold text-gradient">AI全景指南</h1>
+      </a>
+      <!-- 电脑端导航 -->
+      <ul class="hidden md:flex gap-8 text-sm md:text-base">
+        <li><a href="#home" class="hover:text-tech-glow transition-colors">首页</a></li>
+        <li><a href="#ai-types" class="hover:text-tech-glow transition-colors">AI分类</a></li>
+        <li><a href="#ai-features" class="hover:text-tech-glow transition-colors">核心特性</a></li>
+        <li><a href="#ai-future" class="hover:text-tech-glow transition-colors">未来趋势</a></li>
+      </ul>
+      <!-- 移动端汉堡菜单 -->
+      <button id="menuBtn" class="md:hidden text-2xl text-tech-glow">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+    <!-- 移动端导航菜单（默认隐藏） -->
+    <div id="mobileMenu" class="md:hidden hidden bg-tech-dark/95 backdrop-blur-lg border-b border-tech-primary/20 px-4 py-2">
+      <ul class="flex flex-col gap-4 py-2">
+        <li><a href="#home" class="block hover:text-tech-glow transition-colors">首页</a></li>
+        <li><a href="#ai-types" class="block hover:text-tech-glow transition-colors">AI分类</a></li>
+        <li><a href="#ai-features" class="block hover:text-tech-glow transition-colors">核心特性</a></li>
+        <li><a href="#ai-future" class="block hover:text-tech-glow transition-colors">未来趋势</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- 首页英雄区：科技渐变+居中展示+动画 -->
+  <section id="home" class="pt-32 pb-20 px-4 gradient-animate bg-tech-gradient">
+    <div class="container mx-auto text-center max-w-4xl">
+      <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-bold mb-6 animate__animated animate__fadeInDown">
+        探索人工智能的<span class="text-gradient">无限可能</span>
+      </h2>
+      <p class="text-gray-300 text-lg md:text-xl mb-10 animate__animated animate__fadeInUp delay-100">
+        从基础机器学习到通用人工智能，一站式了解AI的分类、应用与未来，解锁科技新时代的核心力量
+      </p>
+      <a href="#ai-types" class="inline-block bg-tech-primary/80 hover:bg-tech-primary px-8 py-3 rounded-lg tech-shadow hover:tech-shadow-hover transition-all animate__animated animate__fadeInUp delay-200">
+        开始探索 <i class="fa-solid fa-arrow-right ml-2"></i>
+      </a>
+    </div>
+    <!-- 装饰性科技元素 -->
+    <div class="absolute top-40 left-10 w-20 h-20 rounded-full bg-tech-glow/20 blur-3xl"></div>
+    <div class="absolute bottom-20 right-10 w-32 h-32 rounded-full bg-tech-secondary/20 blur-3xl"></div>
+  </section>
+
+  <!-- AI分类介绍核心区：卡片式布局+科技感样式 -->
+  <section id="ai-types" class="py-20 px-4 relative">
+    <div class="container mx-auto">
+      <div class="text-center mb-16">
+        <h3 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-4">
+          主流<span class="text-gradient">人工智能</span>分类
+        </h3>
+        <p class="text-gray-400 max-w-2xl mx-auto">
+          人工智能并非单一技术，而是由多个分支领域组成的技术体系，各领域聚焦不同应用场景，共同推动AI技术发展
+        </p>
+      </div>
+
+      <!-- AI分类卡片网格：适配多设备，每行1/2/3列 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- 1. 机器学习 ML -->
+        <div class="bg-tech-dark/60 border border-tech-primary/30 rounded-xl p-6 card-hover tech-shadow">
+          <div class="w-14 h-14 bg-tech-primary/20 rounded-lg flex items-center justify-center mb-5">
+            <i class="fa-solid fa-brain text-2xl text-tech-primary"></i>
+          </div>
+          <h4 class="text-xl font-bold mb-3">机器学习 (ML)</h4>
+          <p class="text-gray-300 mb-4">
+            AI的核心基础，让计算机通过数据自主学习规律，无需显式编程。可分为监督学习、无监督学习、强化学习三大类，是后续所有AI技术的基石。
+          </p>
+          <div class="text-tech-light text-sm">
+            <i class="fa-solid fa-check-circle mr-2 text-tech-glow"></i> 代表应用：推荐系统、数据挖掘、异常检测
+          </div>
         </div>
-    </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container hero-content">
-            <h1>Protect Our Planet, Preserve Our Future</h1>
-            <p>Join the global movement to create a sustainable world through conservation, education, and community action.</p>
-            <a href="#get-involved" class="btn">Join Our Network</a>
+        <!-- 2. 深度学习 DL -->
+        <div class="bg-tech-dark/60 border border-tech-primary/30 rounded-xl p-6 card-hover tech-shadow">
+          <div class="w-14 h-14 bg-tech-secondary/20 rounded-lg flex items-center justify-center mb-5">
+            <i class="fa-solid fa-network-wired text-2xl text-tech-secondary"></i>
+          </div>
+          <h4 class="text-xl font-bold mb-3">深度学习 (DL)</h4>
+          <p class="text-gray-300 mb-4">
+            机器学习的进阶分支，基于人工神经网络模拟人脑结构，能处理海量复杂数据（如图像、语音），是当前AI爆发的核心驱动力。
+          </p>
+          <div class="text-tech-light text-sm">
+            <i class="fa-solid fa-check-circle mr-2 text-tech-glow"></i> 代表应用：人脸识别、语音助手、自动驾驶
+          </div>
         </div>
-    </section>
 
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Green Network</h2>
-                <p>We are a global community dedicated to environmental protection and sustainable development.</p>
-            </div>
-            <div class="about-content">
-                <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Team planting trees">
-                </div>
-                <div class="about-text">
-                    <h3>Our Mission</h3>
-                    <p>Green Network is committed to creating a sustainable future by protecting natural ecosystems, promoting renewable energy, and empowering communities to take environmental action.</p>
-                    <p>Founded in 2010, we've grown from a small grassroots organization to an international network with over 50,000 members across 120 countries.</p>
-                    <p>Our approach combines scientific research, community engagement, and policy advocacy to address the most pressing environmental challenges of our time.</p>
-                    <a href="#" class="btn">Learn More</a>
-                </div>
-            </div>
-            <div class="stats">
-                <div class="stat-item">
-                    <i class="fas fa-tree"></i>
-                    <h3 class="counter" data-target="2500000">0</h3>
-                    <p>Trees Planted</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-users"></i>
-                    <h3 class="counter" data-target="50000">0</h3>
-                    <p>Active Members</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3 class="counter" data-target="120">0</h3>
-                    <p>Countries Reached</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-recycle"></i>
-                    <h3 class="counter" data-target="1500">0</h3>
-                    <p>Cleanup Projects</p>
-                </div>
-            </div>
+        <!-- 3. 自然语言处理 NLP -->
+        <div class="bg-tech-dark/60 border border-tech-primary/30 rounded-xl p-6 card-hover tech-shadow">
+          <div class="w-14 h-14 bg-tech-glow/20 rounded-lg flex items-center justify-center mb-5">
+            <i class="fa-solid fa-comments text-2xl text-tech-glow"></i>
+          </div>
+          <h4 class="text-xl font-bold mb-3">自然语言处理 (NLP)</h4>
+          <p class="text-gray-300 mb-4">
+            让计算机理解、处理和生成人类语言的技术，实现人机自然对话。大语言模型（LLM）是其最新成果，大幅提升了语言理解和生成能力。
+          </p>
+          <div class="text-tech-light text-sm">
+            <i class="fa-solid fa-check-circle mr-2 text-tech-glow"></i> 代表应用：ChatGPT、文心一言、机器翻译
+          </div>
         </div>
-    </section>
 
-    <!-- Initiatives Section -->
-    <section class="initiatives" id="initiatives">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Initiatives</h2>
-                <p>Discover the key programs and projects we're implementing to protect our planet.</p>
-            </div>
-            <div class="initiatives-grid">
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://dialogue.earth/content/uploads/2021/04/lessons-from-the-rush-to-reforest-china-dialogue-2400x1599.jpg" alt="Reforestation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Global Reforestation</h3>
-                        <p>Planting millions of trees worldwide to restore ecosystems, combat climate change, and protect biodiversity.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Ocean Conservation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Ocean Conservation</h3>
-                        <p>Protecting marine ecosystems, reducing plastic pollution, and promoting sustainable fishing practices.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" alt="Renewable Energy">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Renewable Energy</h3>
-                        <p>Promoting solar, wind, and other clean energy sources to reduce dependence on fossil fuels.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-            </div>
+        <!-- 4. 计算机视觉 CV -->
+        <div class="bg-tech-dark/60 border border-tech-primary/30 rounded-xl p-6 card-hover tech-shadow">
+          <div class="w-14 h-14 bg-tech-primary/20 rounded-lg flex items-center justify-center mb-5">
+            <i class="fa-solid fa-eye text-2xl text-tech-primary"></i>
+          </div>
+          <h4 class="text-xl font-bold mb-3">计算机视觉 (CV)</h4>
+          <p class="text-gray-300 mb-4">
+            让计算机“看懂”图像和视频的技术，模拟人类视觉系统，能实现目标检测、图像分割、图像生成等功能，是落地最广泛的AI领域之一。
+          </p>
+          <div class="text-tech-light text-sm">
+            <i class="fa-solid fa-check-circle mr-2 text-tech-glow"></i> 代表应用：人脸识别、图像生成、无人车视觉
+          </div>
         </div>
-    </section>
 
-    <!-- CTA Section -->
-    <section class="cta" id="get-involved">
-        <div class="container">
-            <h2>Join Our Global Movement</h2>
-            <p>Together, we can create a sustainable future for generations to come. Every action counts, no matter how small.</p>
-            <a href="#" class="btn">Become a Member</a>
+        <!-- 5. 生成式AI -->
+        <div class="bg-tech-dark/60 border border-tech-primary/30 rounded-xl p-6 card-hover tech-shadow">
+          <div class="w-14 h-14 bg-tech-secondary/20 rounded-lg flex items-center justify-center mb-5">
+            <i class="fa-solid fa-magic text-2xl text-tech-secondary"></i>
+          </div>
+          <h4 class="text-xl font-bold mb-3">生成式AI</h4>
+          <p class="text-gray-300 mb-4">
+            新一代AI技术，能基于学习到的知识生成全新的内容（文本、图像、音频、视频等），打破了“AI只能分析数据”的边界，创造能力大幅提升。
+          </p>
+          <div class="text-tech-light text-sm">
+            <i class="fa-solid fa-check-circle mr-2 text-tech-glow"></i> 代表应用：Midjourney、Sora、GPT-4o
+          </div>
         </div>
-    </section>
 
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Green Network</h3>
-                    <p>We are dedicated to protecting our planet through collaborative action, education, and sustainable solutions.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#initiatives">Initiatives</a></li>
-                        <li><a href="#get-involved">Get Involved</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Our Programs</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Reforestation</a></li>
-                        <li><a href="#">Ocean Cleanup</a></li>
-                        <li><a href="#">Wildlife Protection</a></li>
-                        <li><a href="#">Climate Education</a></li>
-                        <li><a href="#">Sustainable Agriculture</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Copper Creek Drive, New York</p>
-                    <p><i class="fas fa-phone"></i> +1 (312) 171-0771</p>
-                    <p><i class="fas fa-envelope"></i> support@greennetwork.org</p>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 Green Network. All rights reserved.</p>
-            </div>
+        <!-- 6. 强化学习 RL -->
+        <div class="bg-tech-dark/60 border border-tech-primary/30 rounded-xl p-6 card-hover tech-shadow">
+          <div class="w-14 h-14 bg-tech-glow/20 rounded-lg flex items-center justify-center mb-5">
+            <i class="fa-solid fa-gamepad text-2xl text-tech-glow"></i>
+          </div>
+          <h4 class="text-xl font-bold mb-3">强化学习 (RL)</h4>
+          <p class="text-gray-300 mb-4">
+            让智能体通过“试错”与环境交互，通过奖励和惩罚优化行为策略，最终实现特定目标。广泛应用于决策和控制类场景。
+          </p>
+          <div class="text-tech-light text-sm">
+            <i class="fa-solid fa-check-circle mr-2 text-tech-glow"></i> 代表应用：AlphaGo、机器人控制、游戏AI
+          </div>
         </div>
-    </footer>
+      </div>
+    </div>
+  </section>
 
-    <script>
-        // Mobile Menu Toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('active');
-        });
+  <!-- AI核心特性区：图标+文字，横向布局 -->
+  <section id="ai-features" class="py-20 px-4 bg-tech-dark/80 border-t border-b border-tech-primary/20">
+    <div class="container mx-auto">
+      <div class="text-center mb-16">
+        <h3 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-4">
+          人工智能的<span class="text-gradient">核心特性</span>
+        </h3>
+        <p class="text-gray-400 max-w-2xl mx-auto">
+          各类AI技术虽应用场景不同，但具备共同的核心能力，这些特性让AI成为新时代的核心生产力
+        </p>
+      </div>
 
-        // Counter Animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.counter');
-            const speed = 200; // The lower the slower
-            
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                
-                const inc = target / speed;
-                
-                if(count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(animateCounters, 1);
-                } else {
-                    counter.innerText = target;
-                }
-            });
+      <!-- 特性卡片：响应式网格 -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="text-center p-6 bg-tech-dark/60 rounded-xl border border-tech-primary/30 hover:border-tech-glow transition-colors">
+          <i class="fa-solid fa-data-circle text-4xl text-gradient mb-4"></i>
+          <h5 class="text-lg font-bold mb-2">数据感知</h5>
+          <p class="text-gray-400 text-sm">精准捕捉、识别各类结构化/非结构化数据，实现对客观世界的数字化感知</p>
+        </div>
+        <div class="text-center p-6 bg-tech-dark/60 rounded-xl border border-tech-primary/30 hover:border-tech-glow transition-colors">
+          <i class="fa-solid fa-sitemap text-4xl text-gradient mb-4"></i>
+          <h5 class="text-lg font-bold mb-2">自主学习</h5>
+          <p class="text-gray-400 text-sm">通过海量数据持续优化模型，无需人工干预，能力随数据积累不断提升</p>
+        </div>
+        <div class="text-center p-6 bg-tech-dark/60 rounded-xl border border-tech-primary/30 hover:border-tech-glow transition-colors">
+          <i class="fa-solid fa-lightbulb text-4xl text-gradient mb-4"></i>
+          <h5 class="text-lg font-bold mb-2">逻辑推理</h5>
+          <p class="text-gray-400 text-sm">基于学习到的规律，对未知问题进行分析、判断，给出合理的解决方案</p>
+        </div>
+        <div class="text-center p-6 bg-tech-dark/60 rounded-xl border border-tech-primary/30 hover:border-tech-glow transition-colors">
+          <i class="fa-solid fa-pen-nib text-4xl text-gradient mb-4"></i>
+          <h5 class="text-lg font-bold mb-2">创新生成</h5>
+          <p class="text-gray-400 text-sm">融合现有知识，生成全新的、有价值的内容，实现从“分析”到“创造”的跨越</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AI未来趋势区：简约科技风，大段文字+装饰 -->
+  <section id="ai-future" class="py-20 px-4 relative">
+    <div class="container mx-auto max-w-4xl">
+      <div class="text-center mb-16">
+        <h3 class="text-[clamp(1.8rem,4vw,2.5rem)] font-bold mb-4">
+          人工智能的<span class="text-gradient">未来趋势</span>
+        </h3>
+        <p class="text-gray-400">技术融合·场景落地·通用智能</p>
+      </div>
+
+      <div class="bg-tech-dark/60 border border-tech-primary/30 rounded-2xl p-8 md:p-10 tech-shadow">
+        <ul class="space-y-6">
+          <li class="flex gap-4 items-start">
+            <span class="w-8 h-8 rounded-full bg-tech-primary/20 flex items-center justify-center flex-shrink-0 mt-1">
+              <i class="fa-solid fa-arrow-right text-tech-primary"></i>
+            </span>
+            <p class="text-gray-200">
+              <span class="font-bold text-tech-glow">多模态融合</span>：单一模态（文本/图像/语音）AI将逐步淘汰，多模态大模型成为主流，实现跨媒介的理解和生成。
+            </p>
+          </li>
+          <li class="flex gap-4 items-start">
+            <span class="w-8 h-8 rounded-full bg-tech-primary/20 flex items-center justify-center flex-shrink-0 mt-1">
+              <i class="fa-solid fa-arrow-right text-tech-primary"></i>
+            </span>
+            <p class="text-gray-200">
+              <span class="font-bold text-tech-glow">通用人工智能（AGI）</span>：从“专用AI”向“通用AI”演进，AI将具备自主思考、跨领域解决问题的能力，接近人类智能水平。
+            </p>
+          </li>
+          <li class="flex gap-4 items-start">
+            <span class="w-8 h-8 rounded-full bg-tech-primary/20 flex items-center justify-center flex-shrink-0 mt-1">
+              <i class="fa-solid fa-arrow-right text-tech-primary"></i>
+            </span>
+            <p class="text-gray-200">
+              <span class="font-bold text-tech-glow">产业深度融合</span>：AI将从“工具”升级为“核心生产力”，在制造、医疗、教育、金融等各行各业实现全流程落地，推动产业数字化转型。
+            </p>
+          </li>
+          <li class="flex gap-4 items-start">
+            <span class="w-8 h-8 rounded-full bg-tech-primary/20 flex items-center justify-center flex-shrink-0 mt-1">
+              <i class="fa-solid fa-arrow-right text-tech-primary"></i>
+            </span>
+            <p class="text-gray-200">
+              <span class="font-bold text-tech-glow">安全与规范</span>：AI伦理、数据安全、算法透明将成为行业重点，全球将建立统一的AI监管体系，平衡技术发展与社会安全。
+            </p>
+          </li>
+          <li class="flex gap-4 items-start">
+            <span class="w-8 h-8 rounded-full bg-tech-primary/20 flex items-center justify-center flex-shrink-0 mt-1">
+              <i class="fa-solid fa-arrow-right text-tech-primary"></i>
+            </span>
+            <p class="text-gray-200">
+              <span class="font-bold text-tech-glow">边缘AI普及</span>：AI模型将从云端向边缘设备（手机、机器人、物联网设备）下沉，实现本地实时计算，降低延迟、保护数据隐私。
+            </p>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!-- 装饰元素 -->
+    <div class="absolute top-1/2 left-1/4 w-40 h-40 rounded-full bg-tech-primary/10 blur-3xl -translate-y-1/2"></div>
+    <div class="absolute bottom-10 right-1/4 w-32 h-32 rounded-full bg-tech-glow/10 blur-3xl"></div>
+  </section>
+
+  <!-- 页脚：简约科技风，版权+导航 -->
+  <footer class="bg-tech-dark/90 border-t border-tech-primary/20 py-8 px-4">
+    <div class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="flex items-center gap-2">
+        <i class="fa-solid fa-robot text-tech-glow"></i>
+        <span class="text-gradient font-bold">AI全景指南</span>
+      </div>
+      <p class="text-gray-400 text-sm">© 2026 人工智能科普网 | 所有内容均为科普介绍</p>
+      <div class="flex gap-6 text-gray-300">
+        <a href="#home" class="hover:text-tech-glow transition-colors"><i class="fa-solid fa-house"></i></a>
+        <a href="#ai-types" class="hover:text-tech-glow transition-colors"><i class="fa-solid fa-list"></i></a>
+        <a href="#" class="hover:text-tech-glow transition-colors"><i class="fa-solid fa-info-circle"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript：移动端菜单+平滑滚动+导航栏样式变化 -->
+  <script>
+    // 1. 移动端汉堡菜单切换
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      // 切换菜单图标（汉堡/叉号）
+      const icon = menuBtn.querySelector('i');
+      icon.classList.toggle('fa-bars');
+      icon.classList.toggle('fa-xmark');
+    });
+
+    // 2. 移动端菜单点击后自动关闭
+    const mobileLinks = mobileMenu.querySelectorAll('a');
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        const icon = menuBtn.querySelector('i');
+        icon.classList.remove('fa-xmark');
+        icon.classList.add('fa-bars');
+      });
+    });
+
+    // 3. 滚动时导航栏样式变化（背景更实）
+    window.addEventListener('scroll', () => {
+      const nav = document.querySelector('nav');
+      if (window.scrollY > 50) {
+        nav.classList.remove('bg-tech-dark/80');
+        nav.classList.add('bg-tech-dark/95');
+      } else {
+        nav.classList.remove('bg-tech-dark/95');
+        nav.classList.add('bg-tech-dark/80');
+      }
+    });
+
+    // 4. 所有锚点链接平滑滚动
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          window.scrollTo({
+            top: targetElement.offsetTop - 80, // 偏移80px，避免被导航栏遮挡
+            behavior: 'smooth'
+          });
         }
-
-        // Initialize counters when page loads
-        window.addEventListener('load', animateCounters);
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    document.querySelector('nav ul').classList.remove('active');
-                }
-            });
-        });
-    </script>
+      });
+    });
+  </script>
 </body>
-
 </html>
